@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Image Retrieval</title>
+    <style type="text/css">
+        .imagestyle {
+            /* margin-top: 100px; */
+            /* width:200px; */
+            height: 200px;
+            border-radius: 20px;
+        }
+
+        .image_query_style {
+            /* margin-top: 100px; */
+            width: 400px;
+            /* height:200px; */
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding-left: 60px; padding-right: 60px;">
+        <h1>Image Retrieval</h1>
+        <HR style="FILTER:alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
+
+        <div style="width:450px; float:left; background:#FFFFFF">
+            <h2>Select Query image</h2>
+
+            <form action="" enctype='multipart/form-data' method='POST'>
+                <input type="file" name="picture" style="margin-top:20px;" />
+                <br>
+                <i>Upload your picture, please click here: </i>
+                <input type="submit" value="upload" name="submit" class="button-new" style="margin-top:15px;" />
+                <br>
+                <i>Start retrieval, please click here: </i>
+                <input type="submit" value="retrieval" name="submit" class="button-new" style="margin-top:15px;" />
+            </form>
+            <h3 style="color:#FF0000">{{message}}</h3>
+            <img class="image_query_style" src="{{ img_query }}" width="400" />
+        </div>
+
+        <div style=" margin-left:550px; background:#FFFFFF">
+            <h2>Retrieval result:</h3>
+                <h4 >Similarity of top 3: {{sml1}}, {{sml2}}, {{sml3}}</h4>
+                <div>
+                    <img class="imagestyle" src="{{img1_tmb}}" overflow=hidden />
+                    <img class="imagestyle" src="{{img2_tmb}}" overflow=hidden />
+                    <img class="imagestyle" src="{{img3_tmb}}" overflow=hidden />
+                </div>
+                <h4>Similarity of 4 ~ 6: {{sml4}}, {{sml5}}, {{sml6}}</h4>
+                <div>
+                    <img class="imagestyle" src="{{img4_tmb}}" overflow=hidden />
+                    <img class="imagestyle" src="{{img5_tmb}}" overflow=hidden />
+                    <img class="imagestyle" src="{{img6_tmb}}" overflow=hidden />
+                </div>
+                <h4>Similarity of 7 ~ 9: {{sml7}}, {{sml8}}, {{sml9}}</h4>
+                <div>
+                    <img class="imagestyle" src="{{img7_tmb}}" overflow=hidden />
+                    <img class="imagestyle" src="{{img8_tmb}}" overflow=hidden />
+                    <img class="imagestyle" src="{{img9_tmb}}" overflow=hidden />
+                </div>
+                <!-- <table border="1"  width="1200">
+                <tr>
+                    <td><img src="{{img1_tmb}}" width="400px" overflow=hidden /></td>
+                    <td><img src="{{img2_tmb}}" width="400px" overflow=hidden /></td>
+                    <td><img src="{{img3_tmb}}" width="400px" overflow=hidden /></td>
+                </tr>
+
+                <tr>
+                    <td>{{sml1}}</td>
+                    <td>{{sml2}}</td>
+                    <td>{{sml3}}</td>
+                </tr>
+                <tr>
+                    <td><img src="{{img4_tmb}}" width="200px" overflow=hidden /></td>
+                    <td><img src="{{img5_tmb}}" width="200px" overflow=hidden /></td>
+                    <td><img src="{{img6_tmb}}" width="200px" overflow=hidden /></td>
+                </tr>
+
+                <tr>
+                    <td>{{sml4}}</td>
+                    <td>{{sml5}}</td>
+                    <td>{{sml6}}</td>
+                </tr>
+            </table> -->
+        </div>
+    </div>
+</body>
+
+</html>
