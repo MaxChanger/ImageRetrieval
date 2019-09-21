@@ -11,4 +11,5 @@ DaiNet/data/*
 DaiNet/models/__pycache__
 DaiNet/runs
 DaiNet/data
-
+retrieval/models/gallery_feature.npy
+retrieval/models/image_paths.npy

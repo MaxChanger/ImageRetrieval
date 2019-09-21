@@ -1,18 +1,28 @@
 import os
 import cv2
 import time
+import argparse
 from datetime import timedelta
 from retrieval.create_thumb_images import create_thumb_images
 from flask import Flask, render_template, request, redirect, url_for, make_response,jsonify, flash
 from retrieval.retrieval import load_model, load_data, extract_feature, load_query_image, sort_img, extract_feature_query
 
+
+#parsing instrutions
+
+parser = argparse.ArgumentParser(description='Image Retrieval')
+parser.add_argument('--update', action='store_true', default=False, help='update database')
+args = parser.parse_args()
+
+
 # Create thumb images.  创建缩略图 /home/sun/WorkSpace/HashCode/HashNet/pytorch/data/cifar10/test/
-create_thumb_images(full_folder='./static/image_database/',
-                    thumb_folder='./static/thumb_images/',
-                    suffix='',
-                    height=200,
-                    del_former_thumb=True,
-                    )
+if args.update:
+    create_thumb_images(full_folder='./static/image_database/',
+                        thumb_folder='./static/thumb_images/',
+                        suffix='',
+                        height=200,
+                        del_former_thumb=True,
+                        )
 
 # Prepare data set.
 data_loader = load_data(data_path='./static/image_database/',
@@ -26,7 +36,17 @@ model = load_model(pretrained_model='./retrieval/models/net_best.pth', use_gpu=T
 print("Model load successfully!")
 
 # Extract database features.
-gallery_feature, image_paths = extract_feature(model=model, dataloaders=data_loader) # torch.Size([59, 2048])
+
+if args.update:
+    # Extract database features.
+    gallery_feature, image_paths = extract_feature(model=model, dataloaders=data_loader) # torch.Size([59, 2048])
+    np.save('./retrieval/models/gallery_feature.npy', gallery_feature.numpy())
+    np.save('./retrieval/models/image_paths.npy', np.array(image_paths))
+else:
+    gallery_feature = np.load('./retrieval/models/gallery_feature.npy')
+    gallery_feature = torch.from_numpy(gallery_feature)
+    image_paths = np.load('./retrieval/models/image_paths.npy')
+    image_paths = image_paths.tolist()
 print("extract_feature successfully!")
 
 # Picture extension supported.
