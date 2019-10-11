@@ -3,6 +3,7 @@ import cv2
 import time
 import argparse
 import numpy as np
+import torch
 from datetime import timedelta
 from retrieval.create_thumb_images import create_thumb_images
 from flask import Flask, render_template, request, redirect, url_for, make_response,jsonify, flash
