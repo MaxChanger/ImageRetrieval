@@ -6,7 +6,7 @@ from retrieval.create_thumb_images import create_thumb_images
 from flask import Flask, render_template, request, redirect, url_for, make_response,jsonify, flash
 from retrieval.retrieval_DaiNet import load_model, load_data, extract_feature, load_query_image, sort_img, extract_feature_query
 
-# Create thumb images.  创建缩略图 /home/sun/WorkSpace/HashCode/HashNet/pytorch/data/cifar10/test/
+# Create thumb images.  创建缩略图
 create_thumb_images(full_folder='./static/image_database/',
                     thumb_folder='./static/thumb_images/',
                     suffix='',
@@ -22,7 +22,7 @@ data_loader = load_data(data_path='./static/image_database/',
                         )
 
 # Prepare model. 加载预训练的model
-model = load_model(pretrained_model='./retrieval/models/net_best.pth', use_gpu=True)
+model = load_model(pretrained_model=os.path.join('/home/SENSETIME/sunjiadai/WorkSpace/ImageRetrieval/DaiNet/checkpoint', 'DaiNet', 'ckpt.t7'), use_gpu=True)
 print("Model load successfully!")
 
 # Extract database features.

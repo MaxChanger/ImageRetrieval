@@ -135,7 +135,7 @@ def load_model(pretrained_model=None, use_gpu=True):
     :return:
     """
     net = dainet()
-    checkpoint = torch.load(os.path.join('/home/sun/WorkSpace/DeepLearingCV/image_retrieval_platform/DaiNet/checkpoint', 'DaiNet', 'ckpt.t7'))
+    checkpoint = torch.load(pretrained_model)
     net.load_state_dict(checkpoint['net'])
     net.fc1 = nn.Sequential()
     # print(net)
@@ -167,7 +167,8 @@ if __name__ == '__main__':
                             )
 
     # Prepare model.
-    model = load_model(pretrained_model='./models/net_best.pth', use_gpu=True)
+    model = load_model(pretrained_model=os.path.join('/home/SENSETIME/sunjiadai/WorkSpace/ImageRetrieval/DaiNet/checkpoint', 'DaiNet', 'ckpt.t7'), 
+                        use_gpu=True)
 
     # Extract database features.
     gallery_feature, image_paths = extract_feature(model=model, dataloaders=data_loader)
