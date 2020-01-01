@@ -38,7 +38,7 @@ model = load_model(pretrained_model='./retrieval/models/net_best.pth', use_gpu=T
 print("Model load successfully!")
 
 # Extract database features.
-
+# 在数据库图片不改变的情况下 选择是否保存特征向量 以节约时间
 if args.update:
     # Extract database features.
     gallery_feature, image_paths = extract_feature(model=model, dataloaders=data_loader) # torch.Size([59, 2048])

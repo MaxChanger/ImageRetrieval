@@ -27,6 +27,16 @@ We implemented a simple CNN on the CIFAR-10 dataset, which can be used to change
 python image_retrieval_DaiNet.py
 ```
 
+**Others**
+
+In the case that the database pictures are unchanged, you could choose to add parameters to control whether the feature vector is saved to speed up the startup, the default mode is to save features, use `--update` to force update, such as:
+
+```
+python image_retrieval.py --update
+```
+
+> but this feature is only implemented in `image_retrieval.py` 
+
 **Success**
 
 You will get the link in your terminal, like:
