@@ -96,6 +96,9 @@ def image_retrieval():
             query_feature = extract_feature_query(model=model, img=query_image) # [1,2048]
             # Sort.
             similarity, index = sort_img(query_feature, gallery_feature)
+
+            print('q_feature:',query_feature)
+
             sorted_paths = [image_paths[i] for i in index]
 
             print(sorted_paths) # 打印出查找之后根据相似度进行排序后的图片路径
