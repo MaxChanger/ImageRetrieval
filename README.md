@@ -17,6 +17,7 @@ pip install -r requirements.txt
 
 ```python
 python image_retrieval.py
+# the first time, you shoud add --update to create the thumb_image and the feature of huge image dataset.
 ```
 
 **Example 2**
