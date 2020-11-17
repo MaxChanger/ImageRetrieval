@@ -12,12 +12,14 @@ def del_file(path):
 
 
 def create_thumb_images(full_folder, thumb_folder, suffix='thumb', height=100, del_former_thumb=False):
+    if not os.path.exists(thumb_folder):
+        os.makedirs(thumb_folder)
     if del_former_thumb:
         del_file(thumb_folder)
     count = 0
     for image_file in os.listdir(full_folder):
         try:
-            image = cv2.imread(full_folder + image_file)
+            image = cv2.imread(os.path.join(full_folder, image_file))
             height_src, width_src, _ = image.shape
             #print('width: {}, height: {}'.format(width_src, height_src))
 
@@ -27,11 +29,11 @@ def create_thumb_images(full_folder, thumb_folder, suffix='thumb', height=100, d
             resized_image = cv2.resize(image, (int(width), int(height)))
 
             image_name, image_extension = os.path.splitext(image_file)
-            cv2.imwrite(thumb_folder + image_name + suffix + image_extension, resized_image)
+            cv2.imwrite(os.path.join(thumb_folder, image_name + suffix + image_extension), resized_image)
         except Exception as e:
             count += 1
-            os.remove(full_folder + image_file)
-            print(count,full_folder+image_file, e)
+            os.remove(os.path.join(full_folder, image_file))
+            print(count,os.path.join(full_folder, image_file), e)
             # print(e)
     print('Creating thumb images finished.')
 

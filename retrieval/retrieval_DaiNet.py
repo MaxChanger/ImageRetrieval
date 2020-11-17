@@ -27,7 +27,7 @@ def get_file_list(file_path_list, sort=True):
             file_list.sort()
         else:
             random.shuffle(file_list)
-        file_list = [file_path + file for file in file_list]
+        file_list = [os.path.join(file_path, file) for file in file_list]
         file_lists.append(file_list)
     if len(file_lists) == 1:
         file_lists = file_lists[0]
@@ -71,14 +71,12 @@ def load_data(data_path, batch_size=1, shuffle=False, transform='default'):
     image_path_list = get_file_list(data_path)
 
     gallery_data = Gallery(image_paths=image_path_list,
-                           transform=data_transform,
-                           )
+                           transform=data_transform)
 
     data_loader = dataloader.DataLoader(dataset=gallery_data,
                                         batch_size=batch_size,
                                         shuffle=shuffle,
-                                        num_workers=0,
-                                        )
+                                        num_workers=0)
     return data_loader
 
 
